@@ -1,0 +1,2 @@
+#! /bin/sh
+echo $'\E[B' >> /tmp/robot
