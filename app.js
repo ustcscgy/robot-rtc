@@ -1,3 +1,4 @@
+"use strict";
 /**
  * Module dependencies.
  */
@@ -8,6 +9,7 @@ var settings = require('./settings');
 var MongoStore = require('connect-mongo');
 
 var app = module.exports = express.createServer();
+var io = require('socket.io').listen(app);
 
 // Configuration
 
@@ -55,5 +57,39 @@ app.dynamicHelpers({
   },
 });
 
-app.listen(3000);
+app.listen(8124);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+
+io.sockets.on('connection', function (socket) {
+
+    socket.on('broswer', function (data) {
+        socket.name = "broswer";
+//        io.sockets.emit('move',"turnon");
+        console.log("broswer on");
+    });
+
+    socket.on('robot', function (data) {
+        socket.name = "tpb";
+//        io.sockets.emit('move',"turnon");
+        socket.emit('move',"turnon");
+        console.log("tpb" + data);});
+
+    socket.on('move', function (data) { 
+//        io.sockets.emit('move', data);
+        socket.broadcast.emit('move', data);
+        console.log(data + " sent");
+    });
+
+    socket.on('result', function (data) {
+        console.log(data); 
+    });
+
+    socket.on('keepalive', function (data) {
+        socket.emit('alive',data);
+        console.log("robot keep alive " + data); 
+    });
+
+    socket.on('disconnect', function (data) {
+        console.log(socket.name + "disconnect");
+    });
+});
