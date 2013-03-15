@@ -1,0 +1,26 @@
+#! /bin/sh
+
+if [ -n `pgrep demo` ];then
+	echo "kill exist demo"
+	killall demo
+fi
+
+if [ -e /tmp/robot ];then
+	echo "remove exist named pipe"
+	rm -f /tmp/robot
+fi
+
+mkfifo /tmp/robot
+echo "let's rock"
+
+if [ -e /dev/ttyUSB0 ]
+then
+	/usr/local/Aria/examples/demo -robotPort /dev/ttyUSB0 < /tmp/robot &
+	echo "start real robot"
+else
+	/usr/local/Aria/examples/demo < /tmp/robot & 
+	echo "start simulating robot"
+
+fi
+
+echo " " >> /tmp/robot
