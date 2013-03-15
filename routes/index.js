@@ -10,7 +10,7 @@ module.exports = function(app) {
       }
       res.render('index', {
         title: '首页',
-        posts: posts,
+        posts: posts
       });
     });
   });
@@ -18,7 +18,7 @@ module.exports = function(app) {
   app.get('/reg', checkNotLogin);
   app.get('/reg', function(req, res) {
     res.render('reg', {
-      title: '用户注册',
+      title: '用户注册'
     });
   });
   
@@ -29,14 +29,14 @@ module.exports = function(app) {
       req.flash('error', '两次输入的密码不一致');
       return res.redirect('/reg');
     }
-  
+    
     //生成口令的散列值
     var md5 = crypto.createHash('md5');
     var password = md5.update(req.body.password).digest('base64');
     
     var newUser = new User({
       name: req.body.username,
-      password: password,
+      password: password
     });
     
     //檢查用戶名是否已經存在
@@ -63,7 +63,7 @@ module.exports = function(app) {
   app.get('/login', checkNotLogin);
   app.get('/login', function(req, res) {
     res.render('login', {
-      title: '用户登录',
+      title: '用户登录'
     });
   });
   
@@ -108,7 +108,7 @@ module.exports = function(app) {
         }
         res.render('user', {
           title: user.name,
-          posts: posts,
+          posts: posts
         });
       });
     });

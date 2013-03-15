@@ -1,7 +1,7 @@
 <% if (!user) { %>
   <div class="hero-unit">
     <h1>欢迎来到 USTC View</h1>
-    <p>USTC View 是一个基于 远程呈现机器人 的参观系统。</p>
+    <p>USTC View 是一个基于 <strong>远程呈现机器人</strong> 的参观系统。</p>
     <p>
       <a class="btn btn-primary btn-large" href="/login">登录</a>
       <a class="btn btn-large" href="/reg">立即注册</a>
@@ -15,23 +15,25 @@
 <script src="/javascripts/socket.io.js"></script>
 <script src="/javascripts/websocket.js"></script>
 
-<table class="visible">
+<div>
+  <table class="visible">
     <tr>
-        <td style="text-align: right;">
-            <input type="text" id="conference-name" placeholder="Broadcast Name">
-        </td>
-        <td>
-            <select id="broadcasting-option" style="font-size: 1.8em;">
-                <option>Audio + Video</option>
-                <option>Only Audio</option>
-                <option>Screen</option>
-            </select>
-        </td>
-        <td>
-            <button id="start-conferencing">Start Broadcasting</button>
-        </td>
+      <td style="text-align: right;">
+        <input type="text" id="conference-name" placeholder="Broadcast Name">
+      </td>
+      <td>
+        <select id="broadcasting-option" style="font-size: 1.2em;">
+          <option>Audio + Video</option>
+          <option>Only Audio</option>
+          <option>Screen</option>
+        </select>
+      </td>
+      <td>
+        <button id="start-conferencing">Start Broadcasting</button>
+      </td>
     </tr>
-</table>
+  </table>
+</div>
 
 <!--
 <table class="visible">
@@ -46,19 +48,21 @@
 <table id="rooms-list" class="visible"></table>
 <div id="participants"></div>
 
-<h3>使用说明</h3>
+<div>
+  <h3>使用说明</h3>
 
-<p>arrow key control; press space to stop</p>
-<p>使用方向键控制 空格键停止</p>
+  <p>arrow key control; press space to stop</p>
+  <p>使用方向键控制 空格键停止</p>
 
-<input type="button" id="left" value="left" />
-<input type="button" id="down" value="down" />
-<input type="button" id="up" value="up" />
-<input type="button" id="right" value="right" />
-<input type="button" id="stop" value="stop" />
-<input type="button" id="turnoff" value="turnoff" />
-<input type="button" id="turnon" value="turnon" />
-     
+  <input type="button" id="left" value="left" />
+  <input type="button" id="down" value="down" />
+  <input type="button" id="up" value="up" />
+  <input type="button" id="right" value="right" />
+  <input type="button" id="stop" value="stop" />
+  <input type="button" id="turnoff" value="turnoff" />
+  <input type="button" id="turnon" value="turnon" />
+</div>
+
 <script src="/javascripts/firebase.js"></script>
 <script src="/javascripts/rtc-socket.io.js"></script>
 <script src="/javascripts/RTCPeerConnection-v1.4.js"></script>
