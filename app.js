@@ -11,6 +11,7 @@ var express = require('express'),
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
+  //  app.enable('view cache');
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.cookieParser());

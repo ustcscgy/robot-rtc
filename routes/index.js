@@ -1,6 +1,6 @@
-var crypto = require('crypto');
-var User = require('../models/user.js');
-var Post = require('../models/post.js');
+var crypto = require('crypto'),
+    User = require('../models/user.js'),
+    Post = require('../models/post.js');
 
 module.exports = function(app) {
   app.get('/', function(req, res) {
@@ -8,7 +8,7 @@ module.exports = function(app) {
       if (err) {
         posts = [];
       }
-      res.render('index', {
+      res.render('index.ejs', {
         title: '首页',
         posts: posts
       });
@@ -17,7 +17,7 @@ module.exports = function(app) {
   
   app.get('/reg', checkNotLogin);
   app.get('/reg', function(req, res) {
-    res.render('reg', {
+    res.render('reg.ejs', {
       title: '用户注册'
     });
   });
@@ -62,7 +62,7 @@ module.exports = function(app) {
   
   app.get('/login', checkNotLogin);
   app.get('/login', function(req, res) {
-    res.render('login', {
+    res.render('login.ejs', {
       title: '用户登录'
     });
   });
@@ -106,7 +106,7 @@ module.exports = function(app) {
           req.flash('error', err);
           return res.redirect('/');
         }
-        res.render('user', {
+        res.render('user.ejs', {
           title: user.name,
           posts: posts
         });

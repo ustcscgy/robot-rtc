@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %> - USTC View</title>
     <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
     <style type="text/css">
@@ -11,6 +12,10 @@
       }
     </style>
     <link href="stylesheets/bootstrap-responsive.css" rel="stylesheet">
+    <!-- HTML5 shim for IE backwards compatibility -->
+    <!--[if lt IE 9]>
+      <script src="/javascripts/html5.js"></script>
+    <![endif]-->
   </head>
   <body>
   
@@ -49,13 +54,16 @@
           <%= error %>
         </div>
       <% } %>
+
       <%- body %>
+
       <hr />
-      <footer>
+      <footer class="span12">
         <p><a href="http://www.ustc.edu.cn/" target="_blank">USTC TPB</a> 2013</p>
       </footer>
     </div>
-  </body>
+    
   <script src="/javascripts/jquery.js"></script>
   <script src="/javascripts/bootstrap.js"></script>
+  </body>
 </html>

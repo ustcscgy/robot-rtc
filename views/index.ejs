@@ -15,24 +15,33 @@
 <script src="/javascripts/socket.io.js"></script>
 <script src="/javascripts/websocket.js"></script>
 
-<div>
-  <table class="visible">
-    <tr>
-      <td style="text-align: right;">
-        <input type="text" id="conference-name" placeholder="Broadcast Name">
-      </td>
-      <td>
-        <select id="broadcasting-option" style="font-size: 1.2em;">
-          <option>Audio + Video</option>
-          <option>Only Audio</option>
-          <option>Screen</option>
-        </select>
-      </td>
-      <td>
-        <button id="start-conferencing">Start Broadcasting</button>
-      </td>
-    </tr>
-  </table>
+<div class="row">
+  <div class="span 7">
+    <table class="visible">
+      <tr>
+        <div class="span 7">
+          <td style="text-align: right;">
+            <input type="text" id="conference-name" placeholder="Broadcast Name">
+          </td>
+        </div>
+
+        <div class="span 9">
+          <td>
+            <select id="broadcasting-option" style="font-size: 1.2em;">
+              <option>Audio + Video</option>
+              <option>Only Audio</option>
+              <option>Screen</option>
+            </select>
+          </td>
+        </div>
+        
+        <td>
+          <button id="start-conferencing">Start</button>
+        </td>
+        
+      </tr>
+    </table>
+  </div>
 </div>
 
 <!--
@@ -45,8 +54,10 @@
 </table>
 -->
 
-<table id="rooms-list" class="visible"></table>
-<div id="participants"></div>
+<div class="row">
+  <table id="rooms-list" class="visible"></table>
+  <div id="participants"></div>
+</div>
 
 <div>
   <h3>使用说明</h3>
