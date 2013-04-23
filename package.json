@@ -7,6 +7,6 @@
     , "ejs": "0.8.3"
     , "connect-mongo": "0.1.7"
     , "mongodb": "0.9.9"
-    , "socket.io": "0.9.13"
+    , "socket.io": "0.9.14"
   }
 }
