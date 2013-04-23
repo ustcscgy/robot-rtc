@@ -26,8 +26,6 @@
           <td>
             <select id="broadcasting-option" style="font-size: 1.2em;">
               <option>Audio + Video</option>
-              <option>Only Audio</option>
-              <option>Screen</option>
             </select>
           </td>
         </div>
@@ -40,16 +38,6 @@
     </table>
   </div>
 </div>
-
-<!--
-<table class="visible">
-    <tr>
-        <td style="text-align: center;"> <strong>Private broadcast</strong> ??
-            <a href="WebRTC-One-Way-Broadcasting.html" target="_blank" title="Open this link in new tab. Then your broadcasting room will be private!"><code>WebRTC-One-Way-Broadcasting.html<strong id="unique-token">#123456789</strong></code></a>
-        </td>
-    </tr>
-</table>
--->
 
 <div class="row">
   <table id="rooms-list" class="visible"></table>
@@ -73,9 +61,8 @@
 
 <script src="/javascripts/firebase.js"></script>
 <script src="/javascripts/rtc-socket.io.js"></script>
-<script src="/javascripts/RTCPeerConnection-v1.4.js"></script>
+<script src="/javascripts/RTCPeerConnection-v1.5.js"></script>
 <script src="/javascripts/broadcast.js"></script>
 <script src="/javascripts/broadcast-ui.js"></script>
-
 
 <% } %>

@@ -1,30 +1,26 @@
-/* MIT License: https://webrtc-experiment.appspot.com/licence/ */
+/*  MIT License: https://webrtc-experiment.appspot.com/licence/ 
+    2013, Muaz Khan<muazkh>--[github.com/muaz-khan] 
+    
+    Demo & Documentation: http://bit.ly/RTCPeerConnection-Documentation */
 
 window.moz = !!navigator.mozGetUserMedia;
-window.android = navigator.userAgent.indexOf('Mobile Safari') !== -1 && navigator.userAgent.indexOf('Android') !== -1;
-var RTCPeerConnection = function(options) {
+var RTCPeerConnection = function (options) {
     var w = window,
         PeerConnection = w.mozRTCPeerConnection || w.webkitRTCPeerConnection,
         SessionDescription = w.mozRTCSessionDescription || w.RTCSessionDescription,
         IceCandidate = w.mozRTCIceCandidate || w.RTCIceCandidate;
 
-    var STUN = {
+    var iceServers = {
         iceServers: [{
             url: !moz ? 'stun:stun.l.google.com:19302' : 'stun:23.21.150.121'
         }]
-    },
-        TURN = {
-            iceServers: [{
-                url: "turn:webrtc%40live.com@numb.viagenie.ca",
-                credential: "muazkh"
-            }]
-        };
+    };
 
     var optional = {
         optional: []
     };
 
-    if (!moz && !android) {
+    if (!moz) {
         optional.optional = [{
             DtlsSrtpKeyAgreement: true
         }];
@@ -34,9 +30,8 @@ var RTCPeerConnection = function(options) {
             }];
     }
 
-    var peerConnection = new PeerConnection(location.search.indexOf('turn=true') !== -1 ? TURN : STUN, optional);
+    var peerConnection = new PeerConnection(iceServers, optional);
 
-    var dataPorts = getPorts();
     openOffererChannel();
 
     peerConnection.onicecandidate = onicecandidate;
@@ -46,8 +41,6 @@ var RTCPeerConnection = function(options) {
     function onicecandidate(event) {
         if (!event.candidate || !peerConnection) return;
         if (options.onICE) options.onICE(event.candidate);
-
-        console.log(event.candidate.candidate);
     }
 
     var remoteStreamEventFired = false;
@@ -79,7 +72,7 @@ var RTCPeerConnection = function(options) {
 
     function getInteropSDP(sdp) {
         var inline = getChars() + '\r\n' + (extractedChars = '');
-        sdp = sdp.indexOf('a=crypto') == -1 ? sdp.replace( /c=IN/g ,
+        sdp = sdp.indexOf('a=crypto') == -1 ? sdp.replace(/c=IN/g,
             'a=crypto:1 AES_CM_128_HMAC_SHA1_80 inline:' + inline +
                 'c=IN') : sdp;
 
@@ -93,13 +86,13 @@ var RTCPeerConnection = function(options) {
 
         return sdp;
     }
-	
-	if (moz && !options.onChannelMessage) constraints.mandatory.MozDontOfferDataChannel = true;
+
+    if (moz && !options.onChannelMessage) constraints.mandatory.MozDontOfferDataChannel = true;
 
     function createOffer() {
         if (!options.onOfferSDP) return;
-        
-        peerConnection.createOffer(function(sessionDescription) {
+
+        peerConnection.createOffer(function (sessionDescription) {
             sessionDescription.sdp = getInteropSDP(sessionDescription.sdp);
             peerConnection.setLocalDescription(sessionDescription);
             options.onOfferSDP(sessionDescription);
@@ -112,15 +105,10 @@ var RTCPeerConnection = function(options) {
         options.offerSDP = new SessionDescription(options.offerSDP);
         peerConnection.setRemoteDescription(options.offerSDP);
 
-        peerConnection.createAnswer(function(sessionDescription) {
+        peerConnection.createAnswer(function (sessionDescription) {
             sessionDescription.sdp = getInteropSDP(sessionDescription.sdp);
             peerConnection.setLocalDescription(sessionDescription);
             options.onAnswerSDP(sessionDescription);
-
-            /* signaling method MUST be faster; otherwise increase "300" */
-            moz && options.onChannelMessage && setTimeout(function() {
-                peerConnection.connectDataConnection(dataPorts[0], dataPorts[1]);
-            }, 300);
         }, null, constraints);
     }
 
@@ -134,41 +122,42 @@ var RTCPeerConnection = function(options) {
     function openOffererChannel() {
         if (!options.onChannelMessage || (moz && !options.onOfferSDP)) return;
 
-        if (!moz) _openOffererChannel();
-        else peerConnection.onconnection = _openOffererChannel;
+        _openOffererChannel();
 
         if (moz && !options.attachStream) {
             navigator.mozGetUserMedia({
-                    audio: true,
-                    fake: true
-                }, function(stream) {
-                    peerConnection.addStream(stream);
-                    createOffer();
-                }, useless);
+                audio: true,
+                fake: true
+            }, function (stream) {
+                peerConnection.addStream(stream);
+                createOffer();
+            }, useless);
         }
     }
 
     function _openOffererChannel() {
         channel = peerConnection.createDataChannel(
             options.channel || 'RTCDataChannel',
-            moz ? { } : {
+            moz ? {} : {
                 reliable: false
             });
+
+        if (moz) channel.binaryType = 'blob';
         setChannelEvents();
     }
 
     function setChannelEvents() {
-        channel.onmessage = function(event) {
+        channel.onmessage = function (event) {
             if (options.onChannelMessage) options.onChannelMessage(event);
         };
 
-        channel.onopen = function() {
+        channel.onopen = function () {
             if (options.onChannelOpened) options.onChannelOpened(channel);
         };
-        channel.onclose = function(event) {
+        channel.onclose = function (event) {
             if (options.onChannelClosed) options.onChannelClosed(event);
         };
-        channel.onerror = function(event) {
+        channel.onerror = function (event) {
             console.error(event);
             if (options.onChannelError) options.onChannelError(event);
         };
@@ -177,7 +166,7 @@ var RTCPeerConnection = function(options) {
     if (options.onAnswerSDP && moz) openAnswererChannel();
 
     function openAnswererChannel() {
-        peerConnection.ondatachannel = function(_channel) {
+        peerConnection.ondatachannel = function (_channel) {
             channel = _channel;
             channel.binaryType = 'blob';
             setChannelEvents();
@@ -185,43 +174,30 @@ var RTCPeerConnection = function(options) {
 
         if (moz && !options.attachStream) {
             navigator.mozGetUserMedia({
-                    audio: true,
-                    fake: true
-                }, function(stream) {
-                    peerConnection.addStream(stream);
-                    createAnswer();
-                }, useless);
+                audio: true,
+                fake: true
+            }, function (stream) {
+                peerConnection.addStream(stream);
+                createAnswer();
+            }, useless);
         }
     }
 
-    function useless() {
-    }
+    function useless() {}
 
     function info(information) {
         console.log(information);
     }
 
-    function getPorts(ports) {
-        if (!moz || !options.onChannelMessage) return false;
-        ports = ports || options.dataPorts || [5000, 5001];
-        info('--------using data ports: ' + ports[0] + ' and ' + ports[1]);
-        return ports;
-    }
-
     return {
-        addAnswerSDP: function(sdp, _dataPorts) {
+        addAnswerSDP: function (sdp) {
             info('--------adding answer sdp:');
             info(sdp.sdp);
 
             sdp = new SessionDescription(sdp);
-            peerConnection.setRemoteDescription(sdp, function() {
-                if (moz && options.onChannelMessage) {
-                    var ports = getPorts(_dataPorts);
-                    peerConnection.connectDataConnection(ports[1], ports[0]);
-                }
-            });
+            peerConnection.setRemoteDescription(sdp);
         },
-        addICE: function(candidate) {
+        addICE: function (candidate) {
             info(candidate.candidate);
             peerConnection.addIceCandidate(new IceCandidate({
                 sdpMLineIndex: candidate.sdpMLineIndex,
@@ -231,35 +207,26 @@ var RTCPeerConnection = function(options) {
 
         peer: peerConnection,
         channel: channel,
-        sendData: function(message) {
+        sendData: function (message) {
             channel && channel.send(message);
         }
     };
 };
 
 var video_constraints = {
-    mandatory: { },
+    mandatory: {},
     optional: []
 };
-
-if (android)
-    video_constraints = {
-        mandatory: {
-            maxHeight: 320,
-            maxWidth: 240
-        },
-        optional: []
-    };
 
 function getUserMedia(options) {
     var n = navigator, media;
     n.getMedia = n.webkitGetUserMedia || n.mozGetUserMedia;
     n.getMedia(options.constraints || {
-            audio: true,
-            video: video_constraints
-        }, streaming, options.onerror || function(e) {
-            console.error(e);
-        });
+        audio: true,
+        video: video_constraints
+    }, streaming, options.onerror || function (e) {
+        console.error(e);
+    });
 
     function streaming(stream) {
         var video = options.video;
