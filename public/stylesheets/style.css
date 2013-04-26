@@ -56,3 +56,8 @@ div.span12{
 .hero-unit > p{  
   margin: 0.618em 0;
 }
+
+#help-video > video {  
+   width:100%; 
+   height:auto; 
+}
