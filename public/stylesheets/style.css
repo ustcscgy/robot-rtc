@@ -47,3 +47,9 @@ div.span12{
 .robot-ctl{ 
     margin-bottom: 0.309em;
 }
+
+@media screen and (max-width: 767px){ 
+  footer.span12{ 
+    margin-left: -20px;
+  }
+}
