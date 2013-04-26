@@ -22,6 +22,6 @@ hr{
 #container{
     position: relative;
 }
-#help-video{
-    margin: 0 auto;
+#participants{ 
+    text-align: center;
 }
