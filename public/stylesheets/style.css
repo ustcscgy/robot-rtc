@@ -53,3 +53,6 @@ div.span12{
     margin-left: -20px;
   }
 }
+.hero-unit > p{  
+  margin: 0.618em 0;
+}
