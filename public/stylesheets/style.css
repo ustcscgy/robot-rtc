@@ -1,12 +1,8 @@
-/*body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+body {
+    padding-top: 60px;
+    padding-bottom: 80px;
+/*  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
 }
-
-a {
-  color: #00B7FF;
-}
-*/
 footer.span12 {
     position: fixed;
     bottom: 0;
@@ -14,6 +10,7 @@ footer.span12 {
     padding-top: 50px;
     border-top: none;
     margin-left: 0;
+    text-align: center;
 }
 
 hr{
@@ -25,6 +22,28 @@ hr{
 #participants{ 
     text-align: center;
 }
-#rooms-list { 
-    margin-left: 4.5em;
+
+.input-float{
+    float: left;
+    margin-right: 0.309em;
+}
+#start-conferencing{ 
+    position: relative;
+    top: 0.11em;
+}
+#conference-name{ 
+    
+}
+div.span12{ 
+    margin-left: 0;
+    margin-bottom: 1.236em;
+}/*
+#rooms-list{ 
+    margin-top: 1.236em;
+}*/
+#rooms-list tr{ 
+    height: 2.472em;
+}
+.robot-ctl{ 
+    margin-bottom: 0.309em;
 }

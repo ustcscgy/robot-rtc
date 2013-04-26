@@ -12,51 +12,34 @@
 <script src="/javascripts/socket.io.js"></script>
 <script src="/javascripts/websocket.js"></script>
 
-<div class="row">
-  <div class="span 7">
-    <table class="visible">
-      <tr>
-        <div class="span 7">
-          <td style="text-align: right;">
-            <input type="text" id="conference-name" placeholder="Broadcast Name">
-          </td>
-        </div>
-
-        <div class="span 9">
-          <td>
-            <select id="broadcasting-option" style="font-size: 1.2em;">
-              <option>Audio + Video</option>
-            </select>
-          </td>
-        </div>
-        
-        <td>
-          <button id="start-conferencing">Start</button>
-        </td>
-        
-      </tr>
-    </table>
-  </div>
+<div class="row span12">
+  <input type="text" id="conference-name" class="input-float" placeholder="Broadcast Name">
+  <select id="broadcasting-option" class="input-float">
+    <option>Audio + Video</option>
+  </select>
+  <button class="input-float" id="start-conferencing">Start</button>
 </div>
 
-<div class="row">
-  <table id="rooms-list" class="visible"></table>
+<div class="row span12">
+  <!--<p id="rooms-list-loading">Finding robots...</p>-->
+  <table id="rooms-list" class="visible">
+  </table>
   <div id="participants"></div>
 </div>
 
-<div>
+<div class="span12">
   <h3>使用说明</h3>
 
   <p>arrow key control; press space to stop</p>
   <p>使用方向键控制 空格键停止</p>
 
-  <input type="button" id="left" value="left" />
-  <input type="button" id="down" value="down" />
-  <input type="button" id="up" value="up" />
-  <input type="button" id="right" value="right" />
-  <input type="button" id="stop" value="stop" />
-  <input type="button" id="turnoff" value="turnoff" />
-  <input type="button" id="turnon" value="turnon" />
+  <input class="robot-ctl" type="button" id="left" value="left" />
+  <input class="robot-ctl" type="button" id="down" value="down" />
+  <input class="robot-ctl" type="button" id="up" value="up" />
+  <input class="robot-ctl" type="button" id="right" value="right" />
+  <input class="robot-ctl" type="button" id="stop" value="stop" />
+  <input class="robot-ctl" type="button" id="turnoff" value="turnoff" />
+  <input class="robot-ctl" type="button" id="turnon" value="turnon" />
 </div>
 
 <script src="/javascripts/firebase.js"></script>
