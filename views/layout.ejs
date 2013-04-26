@@ -58,11 +58,17 @@
 
       <%- body %>
 
-     <!-- <hr />-->
-     <footer class="span12">
-       <hr />
-       <p><a href="http://www.ustc.edu.cn/" target="_blank">USTC TPB</a> 2013</p>
-     </footer>
+      <!-- <hr />-->
+      <footer class="span12">
+        <hr />
+        <p><a href="http://www.ustc.edu.cn/" target="_blank">USTC TPB</a>
+          <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]-->
+          <span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">
+            &copy;
+          </span>
+          <!--[if lte IE 8]></span><![endif]-->
+          2013</p>
+      </footer>
 
     </div>
 
