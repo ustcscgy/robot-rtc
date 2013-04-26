@@ -1,6 +1,6 @@
 $(function () {
     var url = window.location.href;
-    var menus = ['login', 'reg', 'logout'];
+    var menus = ['login', 'reg', 'logout', 'help'];
     var i;
     var str;
     var flag = false;
