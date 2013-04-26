@@ -6,3 +6,22 @@ body {
 a {
   color: #00B7FF;
 }
+
+footer.span12 {
+    position: fixed;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1) 45px, rgba(255, 255, 255, 0));
+    padding-top: 50px;
+    border-top: none;
+    margin-left: 0;
+}
+
+hr{
+    margin-top: 1em;
+}
+#container{
+    position: relative;
+}
+#help-video{
+    margin: 0 auto;
+}
