@@ -25,3 +25,6 @@ hr{
 #participants{ 
     text-align: center;
 }
+#rooms-list { 
+    margin-left: 4.5em;
+}
