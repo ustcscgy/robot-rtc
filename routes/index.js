@@ -97,7 +97,10 @@ module.exports = function(app) {
     req.flash('success', '退出成功');
     res.redirect('/');
   });
-  
+
+  app.get('/help', function(req, res) {
+    res.render('help.ejs', {title: '帮助'});
+  });
   // app.get('/u/:user', function(req, res) {
   //   User.get(req.params.user, function(err, user) {
   //     if (!user) {
