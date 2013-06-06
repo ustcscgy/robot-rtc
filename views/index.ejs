@@ -12,20 +12,8 @@
 <script src="/javascripts/socket.io.js"></script>
 <script src="/javascripts/websocket.js"></script>
 
-<div class="row span12">
-  <input type="text" id="conference-name" class="input-float" placeholder="Broadcast Name">
-  <select id="broadcasting-option" class="input-float">
-    <option>Audio + Video</option>
-  </select>
-  <button class="input-float" id="start-conferencing">Start</button>
-</div>
-
-<div class="row span12">
-  <!--<p id="rooms-list-loading">Finding robots...</p>-->
-  <table id="rooms-list" class="visible">
-  </table>
-  <div id="participants"></div>
-</div>
+<div id="freshtilledsoil_embed_widget" class="video-chat-widget"></div>
+<script id="fts" src="http://freshtilledsoil.com/embed/webrtc-v5.js?r=FTS0316-CZ6NqG97"></script>
 
 <div class="span12">
   <h3>使用说明</h3>
@@ -41,11 +29,5 @@
   <input class="robot-ctl" type="button" id="turnoff" value="turnoff" />
   <input class="robot-ctl" type="button" id="turnon" value="turnon" />
 </div>
-
-<script src="/javascripts/firebase.js"></script>
-<script src="/javascripts/rtc-socket.io.js"></script>
-<script src="/javascripts/RTCPeerConnection-v1.5.js"></script>
-<script src="/javascripts/broadcast.js"></script>
-<script src="/javascripts/broadcast-ui.js"></script>
 
 <% } %>
