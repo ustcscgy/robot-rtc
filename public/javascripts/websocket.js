@@ -58,4 +58,6 @@ function keyDown(e) {
     if (keycode == 32) socket.emit('move', "stop");
         <!-- alert("按键码: " + keycode + " 字符: " + realkey); -->
 }
-document.onkeydown = keyDown;
+
+document.body.addEventListener('keydown', keyDown, false);
+//document.onkeydown = keyDown;
