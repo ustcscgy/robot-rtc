@@ -12,8 +12,35 @@
 <script src="/javascripts/socket.io.js"></script>
 <script src="/javascripts/websocket.js"></script>
 
-<div id="freshtilledsoil_embed_widget" class="video-chat-widget"></div>
 <script id="fts" src="/javascripts/webrtc-v5.js"></script>
+<div id="freshtilledsoil_embed_widget" class="video-chat-widget">
+  <section class="status-panel">
+    <div id="connectionIndicator" style="visibility:hidden;" class="connected-indicator">CONNECTED</div>
+    <div class="status-text">
+      <span id="currentChannel">channel</span><br>
+      <a href="#" class="exit-link" id="aExitLink">(click to exit channel)</a>
+    </div>
+    <div class="status-text occupant-count-text">
+      peers: <span id="numberOfOccupants">0</span>
+    </div>
+  </section>
+  <div id="fts_card" style="opacity:0;-webkit-transition-duration: 0s;-moz-transition-duration: 0s;-o-transition-duration: 0s;transition-duration: 0s;">
+    <figure class="fts-front">
+      <form id="channelEntryForm" class="entry-box">
+        <div class="channel-input-container">
+          <input type="text" id="channel" class="channel-input" placeholder="enter channel name">
+          <input id="btnStartChat" class="btn-start-chat" type="submit" value="Start Chat">
+        </div>
+        <div id="RTCMessagingDiv" class="waiting-text"></div>
+      </form>
+    </figure>
+    <figure class="fts-back">
+      <video id="remotevid" class="remote-vid" autoplay></video>
+      <section class="local-video-container">
+        <video id="sourcevid" class="source-vid" autoplay></video>
+      </section>
+    </figure>
+  </div>
 
 <div class="span12">
   <h3>使用说明</h3>
@@ -28,6 +55,7 @@
   <input class="robot-ctl" type="button" id="stop" value="stop" />
   <input class="robot-ctl" type="button" id="turnoff" value="turnoff" />
   <input class="robot-ctl" type="button" id="turnon" value="turnon" />
+</div>
 </div>
 
 <% } %>
