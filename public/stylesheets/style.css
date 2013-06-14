@@ -61,3 +61,7 @@ div.span12{
    width:100%; 
    height:auto; 
 }
+.navbar.navbar-fixed-top {
+   z-index: 20000;   
+}
+}
