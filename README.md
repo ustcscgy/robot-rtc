@@ -3,6 +3,10 @@ telepresence robot.
 
 It uses webrtc and websocket as its core tech.
 
+# DEMO/HELP Video
+
+<https://github.com/ustcscgy/robot-rtc/raw/master/public/help.webm>
+
 # LICENSE
 
 GPLv2+
